@@ -10,6 +10,21 @@ jobs:
   cypress-run:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: runner
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     defaults:
       run:
         shell: bash
@@ -27,18 +42,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Set DATABASE_URL
+        run: echo "DATABASE_URL=postgresql://runner:password@localhost:5432/testdb" >> $GITHUB_ENV
+
       - name: Setup Database (Migrate & Seed)
         run: |
-          echo "DATABASE_URL=file:./test.db" >> $GITHUB_ENV
           npx prisma migrate deploy
           npm run seed
         env:
-          DATABASE_URL: file:./test.db
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Build Next.js App
         run: npm run build
         env:
-          DATABASE_URL: file:./test.db
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Run Cypress E2E tests
         uses: cypress-io/github-action@v6
@@ -46,6 +63,8 @@ jobs:
           start: npm run start
           wait-on: "http://localhost:3000"
           command: npm run cypress:run
+        env:
+          DATABASE_URL: ${{ env.DATABASE_URL }}
 
       - name: Upload Cypress artifacts on failure
         uses: actions/upload-artifact@v4
