@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es5", 
+    "module": "commonjs", 
+    "moduleResolution": "node",
+    "lib": ["es2017", "dom"],
+    
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    
+    "types": ["cypress", "node"]
+  },
+  "include": [
+    "../node_modules/cypress/types/*.d.ts",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.tsx",
+    "**/*.jsx"
+  ]
+}

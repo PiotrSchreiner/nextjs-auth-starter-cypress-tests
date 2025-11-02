@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated Files 
+/prisma/migrations
+migration_lock.toml
+/dev.db
+/prisma/dev.db

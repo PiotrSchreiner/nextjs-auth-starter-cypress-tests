@@ -7,7 +7,11 @@
     "build": "npx prisma migrate deploy || [ \"$DATABASE_URL\" = \"prisma+postgres://accelerate.prisma-data.net/?api_key=API_KEY\" ] && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "npx prisma generate --no-engine"
+    "postinstall": "npx prisma generate --no-engine",
+    
+    "cypress:open": "cypress open", 
+    "cypress:run": "cypress run",
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.5.0",
@@ -20,6 +24,7 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "cypress": "^13.13.0", 
     "@eslint/eslintrc": "^3",
     "@types/bcryptjs": "^3.0.0",
     "@types/node": "^20",
