@@ -4,6 +4,14 @@ import bcrypt from "bcryptjs";
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log("Starte Datenbank-Bereinigung...");
+
+  await prisma.post.deleteMany({});
+
+  await prisma.user.deleteMany({});
+
+  console.log("Datenbank erfolgreich bereinigt. Starte Seeding...");
+
   // Create 5 users with hashed passwords
   const users = await Promise.all([
     prisma.user.create({
