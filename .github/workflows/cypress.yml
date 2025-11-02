@@ -47,6 +47,8 @@ jobs:
 
       - name: Setup Database (Migrate & Seed)
         run: |
+          export DATABASE_URL=${{ env.DATABASE_URL }}
+
           npx prisma migrate deploy
           npm run seed
         env:
