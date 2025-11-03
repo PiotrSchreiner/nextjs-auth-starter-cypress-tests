@@ -12,7 +12,7 @@ describe("1. Authentication Tests", () => {
     });
   });
 
-  it("should not redirect to the login page when an unauthenticated user visits /posts", () => {
+  it("AUTH-T-001: should not redirect to the login page when an unauthenticated user visits /posts", () => {
     cy.visit("/posts");
 
     cy.url().should("include", "/posts");
@@ -20,7 +20,7 @@ describe("1. Authentication Tests", () => {
     cy.contains("Sign In").should("be.visible");
   });
 
-  it("should successfully log in as Admin (Alice) and display the correct UI", () => {
+  it("AUTH-T-002: should successfully log in as Admin (Alice) and display the correct UI", () => {
     cy.login(user.email, user.password);
 
     cy.visit("/posts");
@@ -33,7 +33,7 @@ describe("1. Authentication Tests", () => {
     cy.contains("Sign Out").should("be.visible");
   });
 
-  it("should successfully sign out and return to the login page", () => {
+  it("AUTH-T-003: should successfully sign out and return to the login page", () => {
     cy.login(user.email, user.password);
 
     cy.visit("/posts");

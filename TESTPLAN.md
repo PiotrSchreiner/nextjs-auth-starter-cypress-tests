@@ -13,12 +13,12 @@ The objective is to validate the entire end-user workflow, from registration and
 
 ## 2. Test Scope
 
-| Area                     | Functionality                                                                 | Test Level | Tool                   |
-| :----------------------- | :---------------------------------------------------------------------------- | :--------- | :--------------------- |
-| **Authentication**       | Registration, Login, Logout, Password Reset (if available), Protected Routes. | E2E        | Cypress                |
-| **Content Management**   | Create, Read, Update, and Delete Posts (CRUD).                                | E2E & API  | Cypress (`cy.request`) |
-| **UI Stability**         | Page rendering, Navigation, Layout errors across common viewports.            | E2E        | Cypress                |
-| **Setup/Infrastructure** | DB Migration and Seed process.                                                | Setup/CI   | NPM/Prisma             |
+| Area                     | Functionality                                                      | Test Level | Tool                   |
+| :----------------------- | :----------------------------------------------------------------- | :--------- | :--------------------- |
+| **Authentication**       | Login, Logout, Protected Routes.                                   | E2E        | Cypress                |
+| **Content Management**   | Create, Read, and Delete Posts (CRUD, excluding Update).           | E2E & API  | Cypress (`cy.request`) |
+| **UI Stability**         | Page rendering, Navigation, Layout errors across common viewports. | E2E        | Cypress                |
+| **Setup/Infrastructure** | DB Migration and Seed process.                                     | Setup/CI   | NPM/Prisma             |
 
 ---
 
@@ -48,19 +48,21 @@ The tests are executed against a consistent application environment ensured by C
 
 ## 4. High-Level Test Cases
 
-### 4.1. Functionality: Login/Logout
+### 4.1. Functionality: Authentication
 
-- `AUTH-T-001`: Successful login with valid Admin credentials.
-- `AUTH-T-002`: Failed login with invalid credentials (Validating the error message).
-- `AUTH-T-003`: Successful logout and return to the login page.
-- `AUTH-T-004`: Access to a protected route (e.g., `/posts/new`) without login is blocked and redirects to the login page (if middleware is implemented).
+| ID             | Description                                                                                        |
+| :------------- | :------------------------------------------------------------------------------------------------- |
+| **AUTH-T-001** | **Unauthenticated access to `/posts` is permitted, showing the content and the 'Sign In' button.** |
+| **AUTH-T-002** | Successful login with valid Admin credentials and redirect to the dashboard.                       |
+| **AUTH-T-003** | Successful logout and return to the login page.                                                    |
 
 ### 4.2. Functionality: Post Management (CRUD)
 
-- `POST-T-001`: Successfully **C**reating a new post (End-to-End).
-- `POST-T-002`: The created post is successfully **R**ead (visible) on the `/posts` listing page.
-- `POST-T-003`: Successfully **U**pdating a post and verifying the changes on the listing page.
-- `POST-T-004`: Successfully **D**eleting a post and verifying its removal from the listing.
+| ID             | Description                                                                                      |
+| :------------- | :----------------------------------------------------------------------------------------------- |
+| **POST-T-001** | Successfully **C**reating a new post (End-to-End).                                               |
+| **POST-T-002** | The created post is successfully **R**ead (visible) on the `/posts` listing page.                |
+| **POST-T-003** | Successfully **D**eleting a post and verifying its removal from the listing. (Update is skipped) |
 
 ---
 
