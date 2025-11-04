@@ -27,10 +27,7 @@ describe("1. Authentication Tests", () => {
 
     cy.url().should("not.include", "/login");
 
-    cy.contains("Posts").should("be.visible");
-
-    cy.contains("Sign In").should("not.exist");
-    cy.contains("Sign Out").should("be.visible");
+    cy.checkLoggedInLayout();
   });
 
   it("AUTH-T-003: should successfully sign out and return to the login page", () => {

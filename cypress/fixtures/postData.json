@@ -1,0 +1,10 @@
+{
+  "newPost": {
+    "titleBase": "Cypress Test Post",
+    "body": "This is a post created for the C/R/D tests."
+  },
+  "deletePost": {
+    "titleBase": "Post to Delete",
+    "body": "This post is created solely for deletion test."
+  }
+}
