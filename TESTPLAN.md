@@ -55,7 +55,7 @@ The tests are executed against a consistent application environment ensured by C
 | **AUTH-T-001** | Unauthenticated access to the main `/posts` page is permitted; the page must display content and the **'Sign In'** button. |
 | **AUTH-T-002** | Successful login with valid Admin credentials and redirect to the Posts list.                                              |
 | **AUTH-T-003** | Successful logout and return to the login page.                                                                            |
-|  |
+|                |
 
 ### 4.2. Functionality: Post Management (C/R/D)
 
@@ -83,3 +83,5 @@ The tests are executed against a consistent application environment ensured by C
 | Tests run **stably** (green) in the local environment and on CI. | **Achieved** (Following scope adjustment) |
 | All selectors use **`data-cy`** attributes.                      | **Assumed**                               |
 | Test logic is centralized in Custom Commands / App Actions.      | **Achieved**                              |
+
+DOD-Ready
